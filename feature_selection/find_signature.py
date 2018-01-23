@@ -34,10 +34,22 @@ features_test  = vectorizer.transform(features_test).toarray()
 ### train on only 150 events to put ourselves in this regime
 features_train = features_train[:150].toarray()
 labels_train   = labels_train[:150]
+words = vectorizer.get_feature_names()
 
 
 
 ### your code goes here
+from sklearn import tree
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(features_train,labels_train)
+print clf.score(features_test, labels_test)
+res = clf.feature_importances_
+for i in range (0,len(res)):
+	if res[i]>0.2:
+		print i
+		print res[i]
+		print words[i]
+
 
 
 
